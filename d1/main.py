@@ -37,7 +37,7 @@ if __name__ == "__main__":
                 rightColumnArray[i] = temp 
 
     #error handling if the columns aren't the same length (considering that the problem requires a pair of numbers, this should be always true)
-    if len(leftColumnArray) is not len(rightColumnArray):
+    if len(leftColumnArray) != len(rightColumnArray):
         raise ValueError("left column array and right column array aren't the same length") 
 
     for i in range(0,len(leftColumnArray)):

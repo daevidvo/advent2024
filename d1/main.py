@@ -19,3 +19,26 @@ if __name__ == "__main__":
 
         leftColumnArray.append(leftColumnElement)
         rightColumnArray.append(rightColumnElement)
+
+    #sorting left column into its respective array    
+    for i in range(0,len(leftColumnArray)):
+        for j in range(i+1,len(leftColumnArray)):
+            if leftColumnArray[i] > leftColumnArray[j]:
+                temp = leftColumnArray[j]
+                leftColumnArray[j] = leftColumnArray[i]
+                leftColumnArray[i] = temp 
+
+    #sorting right column into its respective array
+    for i in range(0,len(rightColumnArray)):
+        for j in range(i+1,len(rightColumnArray)):
+            if rightColumnArray[i] > rightColumnArray[j]:
+                temp = rightColumnArray[j]
+                rightColumnArray[j] = rightColumnArray[i]
+                rightColumnArray[i] = temp 
+
+    #error handling if the columns aren't the same length (considering that the problem requires a pair of numbers, this should be always true)
+    if len(leftColumnArray) is not len(rightColumnArray):
+        raise ValueError("left column array and right column array aren't the same length") 
+
+    for i in range(0,len(leftColumnArray)):
+        pass

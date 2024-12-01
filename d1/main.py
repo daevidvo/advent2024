@@ -6,8 +6,6 @@ data = open("./d1/d1data.txt","r").read().splitlines()
 #go through both arrays and subtract each corresponding element from one another
 
 if __name__ == "__main__":
-    print(data)
-
     #declaring arrays
     leftColumnArray = []
     rightColumnArray = []
@@ -40,5 +38,11 @@ if __name__ == "__main__":
     if len(leftColumnArray) != len(rightColumnArray):
         raise ValueError("left column array and right column array aren't the same length") 
 
+    total = 0
+
+    #adding difference in distances together
     for i in range(0,len(leftColumnArray)):
-        pass
+        difference = abs(int(leftColumnArray[i])-int(rightColumnArray[i]))
+        total = total + difference
+
+    print(total)

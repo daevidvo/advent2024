@@ -6,6 +6,8 @@ data = open("./d1/d1data.txt","r").read().splitlines()
 #go through both arrays and subtract each corresponding element from one another
 
 if __name__ == "__main__":
+    #part1
+
     #declaring arrays
     leftColumnArray = []
     rightColumnArray = []
@@ -45,4 +47,25 @@ if __name__ == "__main__":
         difference = abs(int(leftColumnArray[i])-int(rightColumnArray[i]))
         total = total + difference
 
-    print(total)
+    #part2
+    #removing duplicates in leftColumnArray
+    leftColumnSet = set(leftColumnArray)
+
+    #delcaring dictionary we'll use to track key:value pairs
+    dict = {}
+
+    for item in leftColumnSet:
+        for i in range(0,len(rightColumnArray)):
+            if item == rightColumnArray[i]:
+                if item not in dict:
+                    dict[item] = 0
+                else:
+                    dict[item]+=1
+
+    dictTotal = 0
+
+    for key, value in dict.items():
+        dictTotal+=(int(key)*value)
+        print(dictTotal)
+
+    print(dictTotal)

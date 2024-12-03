@@ -2,10 +2,9 @@
 data = open("./d2/d2data.txt","r").read().splitlines()
 
 class Report:
-    def __init__(self, data: dict, flag: bool):
+    def __init__(self, data: dict):
         self.data = data
         self.flag = True
-        self.type = ""
         self.numberOfSafeReports = 0
         
     def splitLinesIntoArray(self):
@@ -20,30 +19,50 @@ class Report:
         # if the next number isn't greater than previous, then set the flag to false.
 
         for i in range(0,len(self.data)):
-            for j in range(0,len(self.data[i])):
-                if self.data[i][j] > self.data[i][j+1]:
+            for j in range(0,len(self.data[i])-1):
+                if int(self.data[i][j]) > int(self.data[i][j+1]):
                     self.flag = False
-                    return
+                    break
+                else:
+                    self.flag = True 
+            
+            if self.flag == True:
+                self.checkForIncrementAmount(self.data[i])  
 
-        self.type = "increasing" 
-        return self.checkForIncrementAmount()            
+        return
 
     def checkForDecreasingNums(self):
         for i in range(0,len(self.data)):
-            for j in range(0,len(self.data[i])):
-                if self.data[i][j] < self.data[i][j+1]:
+            for j in range(0,len(self.data[i])-1):
+                if int(self.data[i][j]) < int(self.data[i][j+1]):
                     self.flag = False
-                    return
-
-        return self.checkForIncrementAmount()
-
-    def checkForIncrementAmount(self):
-        if self.type == "increasing":
+                    break
+                else:
+                    self.flag = True
             
+            if self.flag == True:
+                self.checkForIncrementAmount(self.data[i]) 
+        
+        return
+        
+    def checkForIncrementAmount(self, array: dict):
+        print(array)
 
+        for i in range(0,len(array)-1):
+            print(array[i])
+            if abs(int(array[i])-int(array[i+1])) < 1 or abs(int(array[i])-int(array[i+1])) > 3:
+                self.flag = False
+                break
+            else:
+                self.flag = True
+        
+        if self.flag == True:
+            self.numberOfSafeReports+=1
+         
+        return
 
-        pass
-
+    def returnNumberOfSafeReports(self):
+        return self.numberOfSafeReports 
 if __name__ == "__main__":
     # part1
 
@@ -53,6 +72,10 @@ if __name__ == "__main__":
 
     report = Report(data)
 
-    print(report.data)
-    22
-    pass
+    report.splitLinesIntoArray()
+
+    report.checkForDecreasingNums()
+
+    report.checkForIncreasingNums()
+
+    print(report.returnNumberOfSafeReports())
